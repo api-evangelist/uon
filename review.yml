@@ -1,0 +1,50 @@
+---
+name: University of Newcastle Australia
+description: University of Newcastle Australia public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/uon/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      The University of Newcastle (UON) has no dedicated public API developer
+      portal and no openly documented student/SIS/timetable/library APIs;
+      enterprise and student systems (myUni, online tools, ServiceNow) sit
+      behind institutional SSO and returned 403/login responses to automated
+      probes. The verifiable programmatic footprint is research-oriented: Open
+      Research Newcastle, the institutional repository, runs on the Figshare
+      platform and is therefore reachable via the documented public Figshare
+      REST API (api.figshare.com/v2 returned HTTP 200) plus an OAI-PMH endpoint
+      at openresearch.newcastle.edu.au/oai (returned HTTP 202, a Figshare/CDN
+      bot-mitigation challenge to non-browser clients). A research GitHub
+      organization exists and resolves. No endpoints were fabricated; gated and
+      challenged URLs are recorded honestly below.
+    endpoints:
+      - url: https://www.newcastle.edu.au/
+        status: 403
+        note: Official site; blocks automated clients but live in browser.
+      - url: https://openresearch.newcastle.edu.au/
+        status: 202
+        note: Open Research Newcastle repository (Figshare); CDN challenge to bots.
+      - url: https://openresearch.newcastle.edu.au/oai
+        status: 202
+        note: OAI-PMH endpoint; Figshare platform bot challenge to non-browser clients.
+      - url: https://api.figshare.com/v2/articles?page_size=1
+        status: 200
+        note: Public Figshare REST API serving Open Research Newcastle records.
+      - url: https://docs.figshare.com/
+        status: 200
+        note: Public Figshare API documentation (platform docs).
+      - url: https://github.com/university-of-newcastle-research
+        status: 200
+        note: University of Newcastle Research GitHub organization; research code repos.
+      - url: https://myuni.newcastle.edu.au/
+        status: 200
+        note: myUni student portal; SSO-gated, no public API documented.
+      - url: https://uonline.newcastle.edu.au/
+        status: 403
+        note: Online learning/SSO entry point; gated, not a public API.
+      - url: https://status.newcastle.edu.au/
+        status: 0
+        note: No public status page found at this host (did not resolve).
