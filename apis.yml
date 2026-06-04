@@ -49,6 +49,20 @@ apis:
         url: https://docs.figshare.com/
       - type: Documentation
         url: https://openresearch.newcastle.edu.au/
+      - type: OpenAPI
+        url: openapi/uon-open-research-figshare.yaml
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
   - aid: uon:open-research-oai
     name: Open Research Newcastle (OAI-PMH)
     description: >-

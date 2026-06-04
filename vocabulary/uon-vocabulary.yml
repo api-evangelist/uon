@@ -1,0 +1,51 @@
+---
+vocabulary:
+  name: University of Newcastle Open Research Vocabulary
+  description: >-
+    Controlled vocabulary for the research-output objects and fields exposed by
+    Open Research Newcastle (University of Newcastle Australia) through the
+    Figshare REST API v2. Terms are drawn directly from the Figshare OpenAPI 3.0
+    schema definitions for Article, Author, and PublicFile.
+  version: "1.0.0"
+  terms:
+    - term: Article
+      definition: >-
+        A research output record (article, thesis, dataset, conference paper, or
+        creative work) deposited in Open Research Newcastle and represented by a
+        Figshare article resource.
+      tags: [object, research-output, figshare]
+    - term: doi
+      definition: Digital Object Identifier minted for the research output.
+      tags: [field, identifier, citation]
+    - term: handle
+      definition: Persistent Handle System identifier for the research output.
+      tags: [field, identifier]
+    - term: defined_type_name
+      definition: >-
+        Human-readable name of the output type, e.g. dataset, figure, thesis,
+        conference contribution, software.
+      tags: [field, classification]
+    - term: timeline
+      definition: Object capturing significant lifecycle dates for the output.
+      tags: [field, dates]
+    - term: url_public_html
+      definition: Public web page where the output can be viewed and cited.
+      tags: [field, url, access]
+    - term: Author
+      definition: A contributor credited on a research output.
+      tags: [object, person, contributor]
+    - term: orcid_id
+      definition: ORCID researcher identifier associated with an author.
+      tags: [field, identifier, person]
+    - term: PublicFile
+      definition: A downloadable file attached to a research output.
+      tags: [object, file, download]
+    - term: download_url
+      definition: Direct URL for downloading the attached file.
+      tags: [field, url, download]
+    - term: computed_md5
+      definition: MD5 checksum computed by Figshare for integrity verification of a file.
+      tags: [field, integrity, checksum]
+    - term: Category
+      definition: A subject taxonomy category classifying a research output.
+      tags: [object, classification, taxonomy]

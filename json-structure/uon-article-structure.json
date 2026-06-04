@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uon/main/json-structure/uon-article-structure.json",
+  "name": "UonArticle",
+  "description": "JSON Structure for a Figshare Article (research output) surfaced through Open Research Newcastle, University of Newcastle Australia.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Unique identifier for article" },
+    "title": { "type": "string", "description": "Title of article" },
+    "doi": { "type": "string", "description": "DOI" },
+    "handle": { "type": "string", "description": "Handle" },
+    "url": { "type": "uri", "description": "API endpoint for article" },
+    "url_public_html": { "type": "uri", "description": "Public site endpoint for article" },
+    "url_public_api": { "type": "uri", "description": "Public API endpoint for article" },
+    "thumb": { "type": "string", "description": "Thumbnail image URL" },
+    "defined_type": { "type": "int32", "description": "Type identifier for article" },
+    "defined_type_name": { "type": "string", "description": "Name of the defined type" },
+    "group_id": { "type": "int32", "description": "Group identifier the article belongs to" },
+    "created_date": { "type": "datetime", "description": "Date when article was created" },
+    "modified_date": { "type": "datetime", "description": "Date when article was last modified" },
+    "published_date": { "type": "datetime", "description": "Date when article was published" },
+    "resource_doi": { "type": "string", "description": "DOI of the linked resource" },
+    "resource_title": { "type": "string", "description": "Title of the linked resource" },
+    "timeline": {
+      "type": "object",
+      "description": "Significant dates in the lifecycle of the article",
+      "properties": {
+        "posted": { "type": "string" },
+        "firstOnline": { "type": "string" },
+        "revision": { "type": "string" }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of article authors",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int64" },
+          "full_name": { "type": "string" },
+          "orcid_id": { "type": "string" }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "List of downloadable files attached to the article",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int64" },
+          "name": { "type": "string" },
+          "size": { "type": "int64" },
+          "download_url": { "type": "uri" }
+        }
+      }
+    }
+  },
+  "required": ["id", "title", "doi", "url", "defined_type_name"]
+}

@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "uon": "https://openresearch.newcastle.edu.au/vocab#",
+    "figshare": "https://api.figshare.com/v2/vocab#",
+
+    "University": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+
+    "Article": {
+      "@id": "uon:Article",
+      "@context": {
+        "id": "schema:identifier",
+        "title": "schema:name",
+        "doi": { "@id": "schema:identifier", "@type": "schema:PropertyValue" },
+        "handle": "schema:identifier",
+        "url_public_html": { "@id": "schema:url", "@type": "@id" },
+        "defined_type_name": "schema:additionalType",
+        "created_date": { "@id": "schema:dateCreated", "@type": "schema:DateTime" },
+        "published_date": { "@id": "schema:datePublished", "@type": "schema:DateTime" },
+        "modified_date": { "@id": "schema:dateModified", "@type": "schema:DateTime" },
+        "authors": { "@id": "schema:author", "@type": "@id" },
+        "files": { "@id": "schema:associatedMedia", "@type": "@id" }
+      }
+    },
+
+    "Author": {
+      "@id": "schema:Person",
+      "@context": {
+        "full_name": "schema:name",
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "orcid_id": { "@id": "schema:identifier", "@type": "@id" },
+        "url_name": { "@id": "schema:url", "@type": "@id" }
+      }
+    },
+
+    "PublicFile": {
+      "@id": "schema:MediaObject",
+      "@context": {
+        "name": "schema:name",
+        "size": "schema:contentSize",
+        "download_url": { "@id": "schema:contentUrl", "@type": "@id" },
+        "mimetype": "schema:encodingFormat"
+      }
+    }
+  },
+  "@type": "University",
+  "name": "University of Newcastle Australia",
+  "url": "https://www.newcastle.edu.au/",
+  "description": "Open Research Newcastle institutional open access repository, exposing research outputs via the Figshare REST API v2."
+}

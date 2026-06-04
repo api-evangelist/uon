@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uon/main/json-schema/uon-article-schema.json",
+  "title": "Figshare Article",
+  "description": "An article (research output: article, thesis, dataset, conference paper, creative work) as returned by the Figshare REST API v2, used by Open Research Newcastle (University of Newcastle Australia).",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "doi",
+    "handle",
+    "url",
+    "url_public_html",
+    "url_public_api",
+    "url_private_html",
+    "url_private_api",
+    "timeline",
+    "thumb",
+    "defined_type",
+    "defined_type_name",
+    "created_date",
+    "resource_doi",
+    "resource_title"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for article",
+      "examples": [1434614]
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of article",
+      "examples": ["Test article title"]
+    },
+    "doi": {
+      "type": "string",
+      "description": "DOI",
+      "examples": ["10.6084/m9.figshare.1434614"]
+    },
+    "handle": {
+      "type": "string",
+      "description": "Handle",
+      "examples": ["111184/figshare.1234"]
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "API endpoint for article"
+    },
+    "url_public_html": {
+      "type": "string",
+      "format": "uri",
+      "description": "Public site endpoint for article"
+    },
+    "url_public_api": {
+      "type": "string",
+      "format": "uri",
+      "description": "Public API endpoint for article"
+    },
+    "url_private_html": {
+      "type": "string",
+      "format": "uri",
+      "description": "Private site endpoint for article"
+    },
+    "url_private_api": {
+      "type": "string",
+      "format": "uri",
+      "description": "Private API endpoint for article"
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Significant dates in the lifecycle of the article",
+      "properties": {
+        "posted": { "type": "string", "description": "Date when first published" },
+        "firstOnline": { "type": "string", "description": "Date when first made public" },
+        "revision": { "type": "string", "description": "Date of last revision" }
+      }
+    },
+    "thumb": {
+      "type": "string",
+      "description": "Thumbnail image URL"
+    },
+    "defined_type": {
+      "type": "integer",
+      "description": "Type identifier for article"
+    },
+    "defined_type_name": {
+      "type": "string",
+      "description": "Name of the defined type, e.g. figure, dataset, thesis, conference contribution"
+    },
+    "group_id": {
+      "type": "integer",
+      "description": "Group identifier the article belongs to"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when article was created"
+    },
+    "modified_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when article was last modified"
+    },
+    "published_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date when article was published"
+    },
+    "resource_doi": {
+      "type": "string",
+      "description": "DOI of the linked resource"
+    },
+    "resource_title": {
+      "type": "string",
+      "description": "Title of the linked resource"
+    }
+  }
+}

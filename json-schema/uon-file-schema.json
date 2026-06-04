@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uon/main/json-schema/uon-file-schema.json",
+  "title": "Figshare PublicFile",
+  "description": "A downloadable file attached to a research output, as returned by the Figshare REST API v2 (Open Research Newcastle).",
+  "type": "object",
+  "required": ["id", "name", "size", "is_link_only", "download_url", "supplied_md5", "computed_md5"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "File id",
+      "examples": [3000002]
+    },
+    "name": {
+      "type": "string",
+      "description": "File name",
+      "examples": ["test.xls"]
+    },
+    "size": {
+      "type": "integer",
+      "description": "File size in bytes",
+      "examples": [14848]
+    },
+    "is_link_only": {
+      "type": "boolean",
+      "description": "True if file is hosted somewhere else"
+    },
+    "download_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for file download"
+    },
+    "supplied_md5": {
+      "type": "string",
+      "description": "File supplied md5"
+    },
+    "computed_md5": {
+      "type": "string",
+      "description": "File computed md5"
+    },
+    "mimetype": {
+      "type": "string",
+      "description": "MIME Type of the file, defaults to an empty string"
+    }
+  }
+}

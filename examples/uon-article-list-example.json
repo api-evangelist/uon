@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.figshare.com/v2/articles?institution=&page=1&page_size=10"
+  },
+  "response": [
+    {
+      "id": 1434614,
+      "title": "Test article title",
+      "doi": "10.6084/m9.figshare.1434614",
+      "handle": "111184/figshare.1234",
+      "url": "https://api.figshare.com/v2/articles/1434614",
+      "url_public_html": "https://figshare.com/articles/media/Test_article_title/1434614",
+      "url_public_api": "https://api.figshare.com/v2/articles/1434614",
+      "url_private_html": "https://figshare.com/account/articles/1434614",
+      "url_private_api": "https://api.figshare.com/v2/account/articles/1434614",
+      "timeline": {
+        "posted": "2015-06-01T00:00:00",
+        "firstOnline": "2015-06-01T00:00:00"
+      },
+      "thumb": "https://ndownloader.figshare.com/files/3000002/preview/3000002/thumb.png",
+      "defined_type": 3,
+      "defined_type_name": "dataset",
+      "group_id": 1234,
+      "url_name": "Test_article_title",
+      "published_date": "2015-06-01T00:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+---
+# Spectral ruleset encoding patterns observed in the Figshare REST API v2
+# as consumed by Open Research Newcastle (University of Newcastle Australia).
+formats: [oas3]
+rules:
+  uon-info-contact:
+    description: API info object should declare a contact.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+
+  uon-server-figshare-v2:
+    description: Server URL should be the public Figshare v2 API base.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.figshare\\.com/v2"
+
+  uon-article-has-doi:
+    description: The Article schema should expose a doi property (research outputs are DOI-minted).
+    given: $.components.schemas.Article.properties
+    severity: warn
+    then:
+      field: doi
+      function: truthy
+
+  uon-article-has-public-url:
+    description: The Article schema should expose a public HTML url for citation/linking.
+    given: $.components.schemas.Article.properties
+    severity: warn
+    then:
+      field: url_public_html
+      function: truthy
+
+  uon-author-orcid:
+    description: The Author schema should carry an orcid_id for researcher identity.
+    given: $.components.schemas.Author.properties
+    severity: info
+    then:
+      field: orcid_id
+      function: truthy
+
+  uon-url-format:
+    description: Properties named like URLs should declare format url/uri.
+    given: $.components.schemas..properties[?(@property.match(/url/i))]
+    severity: info
+    then:
+      field: format
+      function: truthy
