@@ -79,6 +79,8 @@ apis:
       - type: Documentation
         url: https://openresearch.newcastle.edu.au/
 common:
+  - type: DomainSecurity
+    url: security/uon-domain-security.yml
   - type: Authentication
     url: authentication/uon-authentication.yml
   - type: OAuthScopes
