@@ -1,4 +1,3 @@
----
 aid: uon
 name: University of Newcastle Australia
 description: >-
@@ -13,9 +12,22 @@ description: >-
   via the Figshare public REST API and an OAI-PMH endpoint, and the University
   maintains a research code presence on GitHub.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+    - plans
+    - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/uon.png
 url: https://raw.githubusercontent.com/api-evangelist/uon/refs/heads/main/apis.yml
 tags:
   - Education
@@ -28,29 +40,23 @@ tags:
   - OAI-PMH
   - Australia
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-07-25'
 specificationVersion: '0.19'
 apis:
-  - aid: uon:open-research-figshare
-    name: Open Research Newcastle (Figshare REST API)
-    description: >-
-      Open Research Newcastle is the University of Newcastle's institutional
-      open access repository, launched in 2025 on the Figshare platform after
-      migrating from the former NOVA repository. Its records (articles, theses,
-      datasets, conference papers, creative works) are accessible through the
-      public Figshare REST API, which is documented and openly callable; the
-      institution can be filtered within Figshare's article search endpoints.
-      The customer-facing repository portal is openresearch.newcastle.edu.au.
+  - aid: uon:uon-altmetric-api
+    name: University of Newcastle Australia altmetric API
+    description: The altmetric API from University of Newcastle Australia — 1 operation(s) for altmetric.
     humanURL: https://openresearch.newcastle.edu.au/
     baseURL: https://api.figshare.com/v2
-    tags: [ Open Research, Open Access, Repository, Research Data, Figshare ]
+    tags:
+      - altmetric
     properties:
+      - type: OpenAPI
+        url: openapi/uon-altmetric-api-openapi.yml
       - type: Documentation
         url: https://docs.figshare.com/
       - type: Documentation
         url: https://openresearch.newcastle.edu.au/
-      - type: OpenAPI
-        url: openapi/uon-open-research-figshare.yaml
       - type: JSONSchema
         url: json-schema/uon-article-schema.json
       - type: x-json-structure
@@ -63,21 +69,243 @@ apis:
         url: json-ld/uon-context.jsonld
       - type: x-example
         url: examples/uon-article-detail-example.json
-  - aid: uon:open-research-oai
-    name: Open Research Newcastle (OAI-PMH)
-    description: >-
-      Open Research Newcastle, on the Figshare platform, exposes an OAI-PMH
-      metadata harvesting endpoint for its open access records. The endpoint is
-      reachable at openresearch.newcastle.edu.au/oai; automated clients may
-      encounter a platform bot-mitigation challenge (HTTP 202) and standard
-      OAI-PMH harvesting verbs (Identify, ListRecords, ListSets) are supported
-      by the Figshare repository software.
+  - aid: uon:uon-articles-api
+    name: University of Newcastle Australia articles API
+    description: The articles API from University of Newcastle Australia — 34 operation(s) for articles.
     humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://openresearch.newcastle.edu.au/oai
-    tags: [ OAI-PMH, Metadata Harvesting, Repository, Open Access ]
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - articles
     properties:
+      - type: OpenAPI
+        url: openapi/uon-articles-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
       - type: Documentation
         url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-authors-api
+    name: University of Newcastle Australia authors API
+    description: The authors API from University of Newcastle Australia — 2 operation(s) for authors.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - authors
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-authors-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-collections-api
+    name: University of Newcastle Australia collections API
+    description: >-
+      The collections API from University of Newcastle Australia — 21 operation(s) for collections.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - collections
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-collections-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-institutions-api
+    name: University of Newcastle Australia institutions API
+    description: >-
+      The institutions API from University of Newcastle Australia — 20 operation(s) for institutions.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - institutions
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-institutions-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-oauth-api
+    name: University of Newcastle Australia oauth API
+    description: The oauth API from University of Newcastle Australia — 1 operation(s) for oauth.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - oauth
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-oauth-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-other-api
+    name: University of Newcastle Australia other API
+    description: The other API from University of Newcastle Australia — 7 operation(s) for other.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - other
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-other-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-profiles-api
+    name: University of Newcastle Australia profiles API
+    description: The profiles API from University of Newcastle Australia — 2 operation(s) for profiles.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - profiles
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-profiles-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-projects-api
+    name: University of Newcastle Australia projects API
+    description: The projects API from University of Newcastle Australia — 17 operation(s) for projects.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - projects
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-projects-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
+  - aid: uon:uon-symplectic-api
+    name: University of Newcastle Australia symplectic API
+    description: >-
+      The symplectic API from University of Newcastle Australia — 5 operation(s) for symplectic.
+    humanURL: https://openresearch.newcastle.edu.au/
+    baseURL: https://api.figshare.com/v2
+    tags:
+      - symplectic
+    properties:
+      - type: OpenAPI
+        url: openapi/uon-symplectic-api-openapi.yml
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Documentation
+        url: https://openresearch.newcastle.edu.au/
+      - type: JSONSchema
+        url: json-schema/uon-article-schema.json
+      - type: x-json-structure
+        url: json-structure/uon-article-structure.json
+      - type: x-spectral-rules
+        url: rules/uon-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uon-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/uon-context.jsonld
+      - type: x-example
+        url: examples/uon-article-detail-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/uon-agentic-access.yml
@@ -101,6 +329,8 @@ common:
     url: finops/uon-finops.yml
   - type: Review
     url: review.yml
+  - type: ProductPage
+    url: https://openresearch.newcastle.edu.au/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
