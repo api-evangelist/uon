@@ -1,0 +1,32 @@
+{
+  "provider": "uon",
+  "sources": [
+    "uon-altmetric-api-openapi.yml",
+    "uon-articles-api-openapi.yml",
+    "uon-authors-api-openapi.yml",
+    "uon-collections-api-openapi.yml",
+    "uon-institutions-api-openapi.yml",
+    "uon-oauth-api-openapi.yml",
+    "uon-other-api-openapi.yml",
+    "uon-profiles-api-openapi.yml",
+    "uon-projects-api-openapi.yml",
+    "uon-symplectic-api-openapi.yml"
+  ],
+  "outputs": [
+    "uon-altmetric-api-openapi.yml",
+    "uon-articles-api-openapi.yml",
+    "uon-authors-api-openapi.yml",
+    "uon-collections-api-openapi.yml",
+    "uon-institutions-api-openapi.yml",
+    "uon-oauth-api-openapi.yml",
+    "uon-other-api-openapi.yml",
+    "uon-profiles-api-openapi.yml",
+    "uon-projects-api-openapi.yml",
+    "uon-symplectic-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
