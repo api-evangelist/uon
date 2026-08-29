@@ -332,6 +332,9 @@ apis:
       - type: x-example
         url: examples/uon-article-detail-example.json
 common:
+  - type: CapabilityMap
+    url: capabilities/uon-capability-edges.yml
+    name: University of Newcastle Australia Business Capability Map
   - type: AgenticAccess
     url: agentic-access/uon-agentic-access.yml
   - type: DomainSecurity
