@@ -1,354 +1,384 @@
 aid: uon
 name: University of Newcastle Australia
+x-type: university
+x-category: Public Research University
 description: >-
-  The University of Newcastle (UON) is a public research university based in
-  Newcastle, New South Wales, Australia, ranked #179 in the QS World University
-  Rankings 2025. Like most Australian universities, UON does not operate a
-  dedicated public API developer portal; the bulk of its student, staff, and
-  enterprise systems (myUni, online tools, ServiceNow) sit behind institutional
-  SSO and are not openly documented. Its most accessible programmatic footprint
-  is research-oriented: Open Research Newcastle, the institutional open access
-  repository hosted on the Figshare platform, exposes machine-readable access
-  via the Figshare public REST API and an OAI-PMH endpoint, and the University
-  maintains a research code presence on GitHub.
+  The University of Newcastle (UON) is a public research university in Callaghan and Newcastle, New
+  South Wales, ranked #179 in the QS World University Rankings order used by this cohort. It is a
+  federation of buyers rather than an API producer: there is no central developer portal and no
+  institutional API gateway — api.newcastle.edu.au, apis.newcastle.edu.au, developer.newcastle.edu.au,
+  data.newcastle.edu.au and status.newcastle.edu.au all fail to resolve — and UON publishes no OpenAPI
+  description for anything. What it genuinely operates is small and specific: a Shibboleth identity
+  provider at idp.newcastle.edu.au serving live SAML 2.0 metadata under its own entityID and scope,
+  registered in the Australian Access Federation; and a self-hosted XNAT 1.9.1.1 imaging-informatics
+  platform at xnat.newcastle.edu.au, run with the Hunter Medical Research Institute on the
+  university's own AWS estate, whose REST API answers on UON's host and is registered as a SAML
+  service provider in the same federation. UON also holds two DataCite repository clients in its own
+  name, ARDCX.UON and UONAU.FIGSHARE. Everything else that looks programmable is a tenancy on someone
+  else's platform and is recorded as such, never as UON engineering: Open Research Newcastle is a
+  Figshare tenancy, the course handbook is a CourseLoop tenancy, the learning management system is an
+  Instructure Canvas tenancy, library guides are Springshare, site search is Squiz Funnelback, the
+  student portal is PeopleSoft behind Okta, and the service desk is Oracle B2C Service. This profile
+  was corrected on 2026-08-30: ten OpenAPI documents previously held here were Figshare's generic
+  api.figshare.com/v2 contract, not the university's, and were removed along with everything derived
+  from them.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
+  commercial: false
   callable_host: true
-  label: Hosted service · you call their endpoint
+  label: Institution-operated endpoints · not sold as a product
   confidence: high
   source:
-  - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+    - conformance
+    - apis.yml
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: self-serve
+  onboarding: approval
   trial: false
-  try_now: true
+  try_now: false
   public: false
-  label: Free · Self-serve signup
+  label: Free · Affiliation-gated, no self-serve signup
   confidence: high
   source:
+    - conformance
     - plans
-    - authentication
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-08-30'
+  method: probed
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/uon.png
 url: https://raw.githubusercontent.com/api-evangelist/uon/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
+  - Higher Education
+  - Education
   - Research
-  - Open Research
-  - Open Access
-  - Repository
-  - OAI-PMH
   - Australia
+  - New South Wales
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Research Computing
+  - Medical Imaging
+  - Research Repository
+  - Course Catalog
+  - DataCite
+  - Tenant
 created: '2026-06-03'
-modified: '2026-07-25'
+modified: '2026-08-30'
 specificationVersion: '0.23'
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Two institution-operated surfaces and four tenant relationships were settled by live probe on
+    2026-08-30, with the operator axis decided before anything was saved. The finding that matters is
+    a correction: every OpenAPI in this repository was Figshare's. Ten refined specs plus the
+    pre-refine original all carried info.title "Figshare Altmetric API" / "Figshare altmetric …",
+    info.contact "Figshare Support" at support.figshare.com, and servers[0].url
+    https://api.figshare.com/v2 — a generic vendor host the cohort audit shows claimed by sixteen
+    other institutions. Those eleven documents and the thirty-six artifacts derived from them
+    (collections, Postman collections, JSON Schema, JSON Structure, examples, JSON-LD context,
+    Spectral rulesets, vocabulary, OAuth scopes, authentication summary, agentic-access contract,
+    capability map) were removed. Nothing was derived to replace them, because UON publishes no
+    machine-readable contract of its own: the XNAT deployment's Swagger at /xapi/v2/api-docs returns
+    302 to login, and XNAT's contract belongs to the XNAT product in any case. What survived probing
+    is real but modest — a live SAML 2.0 IdP metadata document, a live but almost entirely
+    authentication-gated XNAT REST API, and a 9,755-URL handbook sitemap on a CourseLoop tenancy.
+    Two limitations on us rather than findings about the institution: www.newcastle.edu.au and its
+    subordinate hosts sit behind a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge), so
+    robots.txt, llms.txt and .well-known could not be read there; and openresearch.newcastle.edu.au
+    sits behind an AWS WAF challenge (HTTP 202, x-amzn-waf-action: challenge, zero-byte body) on
+    every User-Agent tried, so the OAI-PMH Identify response was never seen and OAI-PMH is recorded
+    as not established rather than assumed. Absences confirmed by negative probe rather than
+    inferred: no API gateway, no developer portal, no open-data portal, no status page, no OIDC
+    discovery document on the IdP, and no security.txt or robots.txt on the XNAT host (both return
+    the application HTML shell, a soft-404). nova.newcastle.edu.au, the university's former VITAL
+    research repository, is a dangling CNAME to a deleted AWS load balancer and no longer resolves.
+  generated: '2026-08-30'
+  method: probed
+  evidence:
+    - url: https://idp.newcastle.edu.au/idp/shibboleth
+      status: 200
+      note: >-
+        INSTITUTION. SAML 2.0 IdP metadata, application/xml, 4,484 bytes. entityID
+        https://idp.newcastle.edu.au/idp/shibboleth, shibmd:Scope newcastle.edu.au, X.509 CN
+        idp.newcastle.edu.au.
+    - url: https://md.aaf.edu.au/aaf-metadata.xml
+      status: 200
+      note: >-
+        Two newcastle.edu.au entities in the Australian Access Federation aggregate — the IdP
+        ("University of Newcastle") and the SP https://xnat.newcastle.edu.au/xnat ("XNAT").
+    - url: https://xnat.newcastle.edu.au/xapi/siteConfig/buildInfo
+      status: 200
+      note: >-
+        INSTITUTION. application/json, XNAT version 1.9.1.1, build 158, buildDate 2024-12-09.
+        Unauthenticated. DNS: prod-xnat-hmri-frontend ELB in ap-southeast-2, UON's own AWS estate.
+    - url: https://xnat.newcastle.edu.au/xapi/v2/api-docs
+      status: 302
+      note: >-
+        Redirect to login. The XNAT Swagger description is not publicly readable, so no contract was
+        saved. /data/projects, /xapi/siteConfig and /xapi/notifications/messages also 302.
+    - url: https://api.datacite.org/clients/ardcx.uon
+      status: 200
+      note: 'DataCite repository client ARDCX.UON, "University of Newcastle", 2020, 65 DOIs.'
+    - url: https://api.datacite.org/clients/uonau.figshare
+      status: 200
+      note: 'DataCite repository client UONAU.FIGSHARE, "University of Newcastle Australia", 2024, 29 DOIs.'
+    - url: https://openresearch.newcastle.edu.au/oai?verb=Identify
+      status: 202
+      note: >-
+        TENANT, unreadable. AWS WAF challenge (x-amzn-waf-action: challenge), zero-byte body on empty,
+        Googlebot and Chrome User-Agents. Figshare tenancy; host resolves to Figshare eu-west-1 IPs.
+    - url: https://handbook.newcastle.edu.au/sitemap.xml
+      status: 200
+      note: >-
+        TENANT. sitemapindex; child sitemap returns 1,173,397 bytes listing 9,755 program/course URLs,
+        lastmod 2026-08-08. Data plane is api-ap-southeast-2.prod.courseloop.com with a uon-prod siteId.
+    - url: https://canvas.newcastle.edu.au/
+      status: 200
+      note: >-
+        TENANT. Byte-identical to newcastle.instructure.com. Canvas REST API at
+        newcastle.instructure.com/api/v1/accounts returns 401 application/json, auth required.
+    - url: https://www.newcastle.edu.au/
+      status: 403
+      note: >-
+        LIVE, bot-blocked. Cloudflare "Just a moment..." interstitial, cf-mitigated: challenge. Not a
+        dead host; a limitation on us. search., library. and downloads.newcastle.edu.au behave the same.
+    - url: https://policies.newcastle.edu.au/
+      status: 200
+      note: INSTITUTION. UON Policy Library on the university's own IP 202.129.141.23, readable.
+    - url: https://libguides.newcastle.edu.au/
+      status: 200
+      note: 'TENANT. Springshare LibGuides, CNAME region-au.libguides.com.'
+    - url: https://myhub.newcastle.edu.au/
+      status: 200
+      note: >-
+        TENANT, gated. PeopleSoft Campus Solutions 9.2 (uon-cs92prd ELB) fronted by an Okta sign-in page.
+    - url: https://github.com/university-of-newcastle-research
+      status: 200
+      note: >-
+        INSTITUTION. "University of Newcastle - Research", 10 public repositories of R, Python and
+        Jupyter research code. No API descriptions.
+    - url: https://api.newcastle.edu.au/
+      status: 0
+      note: Negative probe. No API gateway; host does not resolve.
+    - url: https://developer.newcastle.edu.au/
+      status: 0
+      note: Negative probe. No developer portal; host does not resolve.
+    - url: https://data.newcastle.edu.au/
+      status: 0
+      note: Negative probe. No open-data portal; host does not resolve.
+    - url: https://status.newcastle.edu.au/
+      status: 0
+      note: Negative probe. No status page; host does not resolve.
+    - url: https://nova.newcastle.edu.au/
+      status: 0
+      note: >-
+        Negative probe. Former VITAL research repository. Dangling CNAME to
+        uon-prod-vital-prod-alb-1108074029.ap-southeast-2.elb.amazonaws.com, which no longer resolves.
+    - url: https://idp.newcastle.edu.au/.well-known/openid-configuration
+      status: 404
+      note: Negative probe. The IdP is SAML-only; no OIDC discovery document.
+    - url: https://xnat.newcastle.edu.au/.well-known/security.txt
+      status: 200
+      note: >-
+        Negative probe, soft-404. Returns the 21,657-byte XNAT application shell, not a security.txt.
+        robots.txt on the same host behaves identically.
 apis:
-  - aid: uon:uon-altmetric-api
-    name: University of Newcastle Australia altmetric API
-    description: The altmetric API from University of Newcastle Australia — 1 operation(s) for altmetric.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags:
-      - altmetric
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-altmetric-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-articles-api
-    name: University of Newcastle Australia articles API
-    description: The articles API from University of Newcastle Australia — 34 operation(s) for articles.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags:
-      - Articles
-    tags_raw:
-      - articles
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-articles-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-authors-api
-    name: University of Newcastle Australia authors API
-    description: The authors API from University of Newcastle Australia — 2 operation(s) for authors.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags:
-      - Authors
-    tags_raw:
-      - authors
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-authors-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-collections-api
-    name: University of Newcastle Australia collections API
+  - aid: uon:identity-federation
+    name: University of Newcastle Shibboleth Identity Provider (SAML 2.0 metadata)
     description: >-
-      The collections API from University of Newcastle Australia — 21 operation(s) for collections.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
+      UON's institutional identity provider, publishing machine-readable SAML 2.0 metadata at a
+      stable URL. entityID https://idp.newcastle.edu.au/idp/shibboleth, shibmd:Scope newcastle.edu.au,
+      SingleSignOnService endpoints for the HTTP-POST and HTTP-Redirect bindings, and a signing
+      KeyDescriptor whose X.509 certificate carries CN=idp.newcastle.edu.au. Registered in the
+      Australian Access Federation aggregate under the display name "University of Newcastle" and
+      interfederated internationally through eduGAIN. This is institution-operated by definition and
+      is the most consequential machine-readable surface UON runs — and the class of surface that is
+      almost never catalogued.
+    humanURL: https://www.newcastle.edu.au/
+    baseURL: https://idp.newcastle.edu.au/idp/shibboleth
     tags:
-      - Collection
-    tags_raw:
-      - collections
+      - Identity Federation
+      - SAML
+      - Shibboleth
+      - AAF
+      - eduGAIN
+      - Single Sign-On
+    x-operator: institution
+    x-operator-evidence: >-
+      Metadata is served from a newcastle.edu.au host, self-asserts scope newcastle.edu.au, and its
+      signing certificate is issued to CN=idp.newcastle.edu.au. Present in the AAF federation
+      aggregate under UON's own entityID. The public hostname CNAMEs to AAF's managed
+      idp-cname.aaf.edu.au CloudFront front end; the federation entity, scope and signing key remain
+      the university's.
+    x-developer-usable: false
+    x-developer-note: >-
+      An end-user login federation, not a developer authorization surface. There is no client
+      registration path, no token endpoint and no consent screen an outside developer could integrate
+      against. GET /.well-known/openid-configuration returns 404 — SAML only.
     properties:
-      - type: OpenAPI
-        url: openapi/uon-collections-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-institutions-api
-    name: University of Newcastle Australia institutions API
+      - type: Conformance
+        url: conformance/uon-conformance.yml
+      - type: Federation
+        url: https://md.aaf.edu.au/aaf-metadata.xml
+  - aid: uon:xnat-imaging
+    name: University of Newcastle XNAT Imaging Informatics Platform
     description: >-
-      The institutions API from University of Newcastle Australia — 20 operation(s) for institutions.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
+      A self-hosted XNAT 1.9.1.1 imaging-informatics platform operated by the university with the
+      Hunter Medical Research Institute, running on UON's own AWS estate in ap-southeast-2 behind the
+      prod-xnat-hmri-frontend load balancer and registered as a SAML service provider
+      (https://xnat.newcastle.edu.au/xnat) in the Australian Access Federation. The REST API is live
+      on UON's host: /xapi/siteConfig/buildInfo and /xapi/siteConfig/siteId answer unauthenticated
+      with application/json, and /data/JSESSION issues a session token, while /data/projects,
+      /xapi/siteConfig and the Swagger description at /xapi/v2/api-docs all redirect to login. This is
+      genuine institution-operated research computing, and it is authentication-gated rather than
+      absent. No specification is saved here: XNAT's API contract is the XNAT product's, shared by
+      every deployment, and this repository records the deployment rather than the product.
+    humanURL: https://xnat.newcastle.edu.au/
+    baseURL: https://xnat.newcastle.edu.au
     tags:
-      - institutions
+      - Research Computing
+      - Medical Imaging
+      - XNAT
+      - Neuroimaging
+      - Research Data
+    x-operator: institution
+    x-operator-evidence: >-
+      Host is under newcastle.edu.au and resolves to prod-xnat-hmri-frontend-1616443891
+      .ap-southeast-2.elb.amazonaws.com, a load balancer in the university's own AWS account. XNAT is
+      open-source software the institution self-hosts; there is no vendor tenancy host in the chain.
+      The instance is a registered SP in the AAF federation under UON's domain.
+    x-software: XNAT 1.9.1.1 (open source, Washington University)
+    x-developer-usable: false
+    x-developer-note: >-
+      Effectively closed to outside developers. Two unauthenticated site-configuration endpoints are
+      readable; every data endpoint and the API description itself require a session. Access is by
+      institutional affiliation through the federation, not by self-serve signup.
     properties:
-      - type: OpenAPI
-        url: openapi/uon-institutions-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-oauth-api
-    name: University of Newcastle Australia oauth API
-    description: The oauth API from University of Newcastle Australia — 1 operation(s) for oauth.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags:
-      - Authentication
-    tags_raw:
-      - oauth
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-oauth-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-other-api
-    name: University of Newcastle Australia other API
-    description: The other API from University of Newcastle Australia — 7 operation(s) for other.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags: []
-    tags_raw:
-      - other
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-other-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-profiles-api
-    name: University of Newcastle Australia profiles API
-    description: The profiles API from University of Newcastle Australia — 2 operation(s) for profiles.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags:
-      - Profiles
-    tags_raw:
-      - profiles
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-profiles-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-projects-api
-    name: University of Newcastle Australia projects API
-    description: The projects API from University of Newcastle Australia — 17 operation(s) for projects.
-    humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
-    tags:
-      - Project
-    tags_raw:
-      - projects
-    properties:
-      - type: OpenAPI
-        url: openapi/uon-projects-api-openapi.yml
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
-  - aid: uon:uon-symplectic-api
-    name: University of Newcastle Australia symplectic API
+      - type: Website
+        url: https://xnat.newcastle.edu.au/
+      - type: Conformance
+        url: conformance/uon-conformance.yml
+  - aid: uon:open-research-figshare
+    name: Open Research Newcastle (Figshare) — TENANT
     description: >-
-      The symplectic API from University of Newcastle Australia — 5 operation(s) for symplectic.
+      The university's open-access institutional repository and research-data store, running on the
+      Figshare platform at openresearch.newcastle.edu.au. This is a genuine institutional fact and one
+      of the few programmable research surfaces UON has, so the relationship is recorded — but it is
+      recorded as a TENANCY, not as a UON API. The data, the DOIs and the collection policy are UON's;
+      the contract, the API design and the OAI-PMH implementation are Figshare's. No Figshare
+      specification is kept in this repository. Eleven were, until 2026-08-30, and their removal is the
+      substance of this re-profile. Probed: the host answers but every request returns an AWS WAF
+      challenge (HTTP 202, x-amzn-waf-action: challenge, zero-byte body), including
+      /oai?verb=Identify, so no OAI-PMH conformance is claimed.
     humanURL: https://openresearch.newcastle.edu.au/
-    baseURL: https://api.figshare.com/v2
+    baseURL: https://openresearch.newcastle.edu.au
     tags:
-      - symplectic
+      - Research Repository
+      - Open Access
+      - Figshare
+      - Tenant
+      - Research Data
+      - DataCite
+    x-operator: tenant
+    x-operator-evidence: >-
+      openresearch.newcastle.edu.au resolves to Figshare's eu-west-1 estate (54.170.206.11,
+      34.250.3.122, 34.255.49.145) behind an AWS WAF. The generic contract every Figshare customer
+      shares is served from api.figshare.com/v2, a host the cohort audit finds claimed by sixteen
+      other institutions in this catalog.
+    x-vendor: Figshare
     properties:
-      - type: OpenAPI
-        url: openapi/uon-symplectic-api-openapi.yml
+      - type: Website
+        url: https://openresearch.newcastle.edu.au/
       - type: Documentation
         url: https://docs.figshare.com/
+  - aid: uon:course-handbook-courseloop
+    name: University of Newcastle Course Handbook (CourseLoop) — TENANT
+    description: >-
+      The university's program and course handbook, served from handbook.newcastle.edu.au on the
+      CourseLoop platform. Machine-readable to the extent that it publishes a sitemap index whose
+      child enumerates 9,755 program and course URLs with last-modified dates, which is a real
+      discovery surface — but the data plane behind it is api-ap-southeast-2.prod.courseloop.com under
+      a uon-prod site identifier, a generic vendor host, so this is a tenancy. No CourseLoop
+      specification is saved here. The site's robots.txt disallows all crawlers except Googlebot,
+      Bingbot and Funnelback, which is worth recording as an agent-access fact about a course catalog
+      universities are usually happy to have indexed.
+    humanURL: https://handbook.newcastle.edu.au/
+    baseURL: https://handbook.newcastle.edu.au
+    tags:
+      - Course Catalog
+      - CourseLoop
+      - Tenant
+      - Curriculum
+      - Sitemap
+    x-operator: tenant
+    x-operator-evidence: >-
+      handbook.newcastle.edu.au CNAMEs to d3ulpnuzhfoca8.cloudfront.net; the application's own
+      envConfig names API_DOMAIN api-ap-southeast-2.prod.courseloop.com and bootstrapConfig siteId
+      uon-prod, a per-customer identifier on a shared vendor host.
+    x-vendor: CourseLoop
+    properties:
+      - type: Website
+        url: https://handbook.newcastle.edu.au/
+      - type: Sitemap
+        url: https://handbook.newcastle.edu.au/sitemap.xml
+  - aid: uon:canvas-lms
+    name: University of Newcastle Canvas LMS (Instructure) — TENANT
+    description: >-
+      UON's learning management system, an Instructure Canvas tenancy reachable both at
+      canvas.newcastle.edu.au and at newcastle.instructure.com, which return the same page byte for
+      byte. Canvas ships a well-documented REST API and it is live on this tenancy —
+      /api/v1/accounts returns HTTP 401 application/json with "user authorisation required" — so the
+      surface exists and is authentication-gated rather than absent. It is Instructure's contract and
+      Instructure's engineering; recorded as a tenancy, and no Canvas specification is saved here.
+      Any LTI 1.3 or Caliper conformance on this platform is the vendor's, not the university's.
+    humanURL: https://canvas.newcastle.edu.au/
+    baseURL: https://newcastle.instructure.com/api/v1
+    tags:
+      - Learning Management
+      - Canvas
+      - Instructure
+      - Tenant
+      - Teaching
+    x-operator: tenant
+    x-operator-evidence: >-
+      canvas.newcastle.edu.au serves the identical 26,245-byte Canvas login page as
+      newcastle.instructure.com, a per-customer subdomain on Instructure's shared platform. The API
+      answers on the instructure.com host.
+    x-vendor: Instructure Canvas
+    properties:
+      - type: Website
+        url: https://canvas.newcastle.edu.au/
       - type: Documentation
-        url: https://openresearch.newcastle.edu.au/
-      - type: JSONSchema
-        url: json-schema/uon-article-schema.json
-      - type: x-json-structure
-        url: json-structure/uon-article-structure.json
-      - type: x-spectral-rules
-        url: rules/uon-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uon-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/uon-context.jsonld
-      - type: x-example
-        url: examples/uon-article-detail-example.json
+        url: https://canvas.instructure.com/doc/api/
 common:
-  - type: CapabilityMap
-    url: capabilities/uon-capability-edges.yml
-    name: University of Newcastle Australia Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/uon-agentic-access.yml
-  - type: DomainSecurity
-    url: security/uon-domain-security.yml
-  - type: Authentication
-    url: authentication/uon-authentication.yml
-  - type: OAuthScopes
-    url: scopes/uon-scopes.yml
   - type: Website
     url: https://www.newcastle.edu.au/
-  - type: GitHub
+  - type: IdentityFederation
+    url: https://idp.newcastle.edu.au/idp/shibboleth
+  - type: ResearchComputing
+    url: https://xnat.newcastle.edu.au/
+  - type: ResearchRepository
+    url: https://openresearch.newcastle.edu.au/
+  - type: CourseCatalog
+    url: https://handbook.newcastle.edu.au/
+  - type: Policies
+    url: https://policies.newcastle.edu.au/
+  - type: Documentation
+    url: https://libguides.newcastle.edu.au/
+    name: University of Newcastle Library Guides (Springshare LibGuides — tenant)
+  - type: GitHubOrganization
     url: https://github.com/university-of-newcastle-research
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/university-of-newcastle/
+  - type: Conformance
+    url: conformance/uon-conformance.yml
+  - type: DomainSecurity
+    url: security/uon-domain-security.yml
   - type: Plans
     url: plans/uon-plans-pricing.yml
   - type: RateLimits
@@ -357,8 +387,6 @@ common:
     url: finops/uon-finops.yml
   - type: Review
     url: review.yml
-  - type: ProductPage
-    url: https://openresearch.newcastle.edu.au/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
