@@ -67,6 +67,22 @@ tags:
   - Research Repository
   - Course Catalog
   - DataCite
+  - Tenants
+tags_raw:
+  - University
+  - Higher Education
+  - Education
+  - Research
+  - Australia
+  - New South Wales
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Research Computing
+  - Medical Imaging
+  - Research Repository
+  - Course Catalog
+  - DataCite
   - Tenant
 created: '2026-06-03'
 modified: '2026-08-30'
@@ -209,6 +225,13 @@ apis:
       - Shibboleth
       - AAF
       - eduGAIN
+      - SSO
+    tags_raw:
+      - Identity Federation
+      - SAML
+      - Shibboleth
+      - AAF
+      - eduGAIN
       - Single Sign-On
     x-operator: institution
     x-operator-evidence: >-
@@ -283,6 +306,13 @@ apis:
       - Research Repository
       - Open Access
       - Figshare
+      - Tenants
+      - Research Data
+      - DataCite
+    tags_raw:
+      - Research Repository
+      - Open Access
+      - Figshare
       - Tenant
       - Research Data
       - DataCite
@@ -314,6 +344,12 @@ apis:
     tags:
       - Course Catalog
       - CourseLoop
+      - Tenants
+      - Curriculum
+      - Sitemap
+    tags_raw:
+      - Course Catalog
+      - CourseLoop
       - Tenant
       - Curriculum
       - Sitemap
@@ -341,6 +377,12 @@ apis:
     humanURL: https://canvas.newcastle.edu.au/
     baseURL: https://newcastle.instructure.com/api/v1
     tags:
+      - Learning Management
+      - Canvas
+      - Instructure
+      - Tenants
+      - Teaching
+    tags_raw:
       - Learning Management
       - Canvas
       - Instructure
