@@ -75,14 +75,36 @@ The University of Newcastle (UON) is a public research university in Newcastle, 
 
 ## Tags
 
-Education, Higher Education, University, Research, Open Research, Open Access, Repository, OAI-PMH, Australia
+University, Higher Education, Education, Research, Australia, New South Wales, Identity Federation, SAML, Shibboleth, Research Computing, Medical Imaging, Research Repository, Course Catalog, DataCite, Tenant
 
 ## APIs
 
-UON does not operate a dedicated public API developer portal. The verifiable programmatic footprint is research-oriented, via the Figshare-hosted institutional repository:
+UON operates no public developer portal and no API gateway (api., apis., developer., data. and
+status.newcastle.edu.au do not resolve), and publishes no OpenAPI for anything. Surfaces are recorded
+with an operator, because for a university that is the question that matters.
 
-- **Open Research Newcastle (Figshare REST API)** — institutional open access repository launched in 2025 on Figshare; records are accessible through the public Figshare REST API. Docs: https://docs.figshare.com/ · Repository: https://openresearch.newcastle.edu.au/
-- **Open Research Newcastle (OAI-PMH)** — OAI-PMH metadata harvesting endpoint at https://openresearch.newcastle.edu.au/oai (automated clients may hit a platform bot-mitigation challenge).
+Institution-operated:
+
+- **Shibboleth Identity Provider (SAML 2.0 metadata)** — https://idp.newcastle.edu.au/idp/shibboleth
+  returns HTTP 200 application/xml with entityID `https://idp.newcastle.edu.au/idp/shibboleth` and
+  `shibmd:Scope newcastle.edu.au`. Registered in the Australian Access Federation aggregate.
+- **XNAT imaging informatics platform** — https://xnat.newcastle.edu.au, self-hosted XNAT 1.9.1.1 on
+  UON's own AWS estate with the Hunter Medical Research Institute, registered as a SAML service
+  provider in the AAF. `/xapi/siteConfig/buildInfo` answers unauthenticated; data endpoints and the
+  Swagger description redirect to login.
+
+Tenant relationships — real institutional facts, but the contract is the vendor's and none of these
+vendors' specifications are kept in this repository:
+
+- **Open Research Newcastle** — Figshare tenancy at https://openresearch.newcastle.edu.au (AWS WAF
+  challenge, HTTP 202, on every request including `/oai?verb=Identify`).
+- **Course Handbook** — CourseLoop tenancy at https://handbook.newcastle.edu.au; sitemap enumerates
+  9,755 program and course URLs.
+- **Canvas LMS** — Instructure tenancy at https://canvas.newcastle.edu.au; the Canvas REST API returns
+  HTTP 401 at `/api/v1/accounts`.
+
+Also holds two DataCite repository clients in its own name: `ARDCX.UON` (65 DOIs) and
+`UONAU.FIGSHARE` (29 DOIs).
 
 ## Plans, Rate Limits, and FinOps
 
@@ -93,18 +115,46 @@ UON does not operate a dedicated public API developer portal. The verifiable pro
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-30
 
 ## Common Properties
 
-- Website: https://www.newcastle.edu.au/
-- GitHub: https://github.com/university-of-newcastle-research
-- LinkedIn: https://www.linkedin.com/school/university-of-newcastle/
+- Website: https://www.newcastle.edu.au/ (live, behind a Cloudflare bot challenge — HTTP 403)
+- Identity Federation: https://idp.newcastle.edu.au/idp/shibboleth
+- Research Computing: https://xnat.newcastle.edu.au/
+- Research Repository: https://openresearch.newcastle.edu.au/
+- Course Catalog: https://handbook.newcastle.edu.au/
+- Policies: https://policies.newcastle.edu.au/
+- Library Guides: https://libguides.newcastle.edu.au/ (Springshare tenancy)
+- GitHub Organization: https://github.com/university-of-newcastle-research
+- Conformance: [conformance/uon-conformance.yml](conformance/uon-conformance.yml)
 - Review: [review.yml](review.yml)
 
 ## Notes
 
-This profile reflects only publicly verifiable resources. No API endpoints were fabricated. UON's student, staff, and enterprise systems (myUni, online tools, ServiceNow) sit behind institutional SSO and are not openly documented; probes to the main site and learning portals returned 403/login responses. The cataloged research repository is hosted on Figshare, so its programmatic access is provided by the documented public Figshare REST API and an OAI-PMH endpoint. The Figshare repository and OAI endpoint returned HTTP 202 (CDN/platform bot challenge) to automated clients but are live in a browser; the Figshare public API (api.figshare.com/v2) returned HTTP 200. See [review.yml](review.yml) for per-URL status.
+Re-profiled on 2026-08-30 under the API Evangelist university pipeline, which settles operator
+attribution before saving anything. **This repository previously held eleven Figshare OpenAPI
+documents attributed to the University of Newcastle.** Every one of them carried
+`info.title: "Figshare Altmetric API"` (or `"Figshare altmetric <Resource> API"`),
+`info.contact: Figshare Support` at support.figshare.com, and `servers[0].url:
+https://api.figshare.com/v2` — a generic vendor host the cohort audit finds claimed by sixteen other
+institutions in this catalog. Those eleven specs and the thirty-six artifacts derived from them
+(OpenCollection and Postman collections, JSON Schema, JSON Structure, examples, a JSON-LD context,
+two Spectral rulesets, a vocabulary, OAuth scopes, an authentication summary, an agentic-access
+contract and a capability map) were removed. Nothing was derived to replace them: UON publishes no
+machine-readable contract of its own, and the XNAT deployment's Swagger is behind authentication and
+belongs to the XNAT product in any case.
+
+No API endpoints were fabricated. Limits on this pass, recorded as limitations on us rather than
+findings about the institution: www.newcastle.edu.au and its subordinate hosts return a Cloudflare
+bot challenge (HTTP 403, `cf-mitigated: challenge`), so robots.txt, llms.txt and `.well-known` could
+not be read there; openresearch.newcastle.edu.au returns an AWS WAF challenge (HTTP 202,
+`x-amzn-waf-action: challenge`, zero-byte body) on every User-Agent tried, so the OAI-PMH `Identify`
+response was never seen and OAI-PMH conformance is recorded as **not established** rather than
+assumed. `nova.newcastle.edu.au`, the former VITAL repository, is a dangling CNAME to a deleted AWS
+load balancer and no longer resolves. See [apis.yml](apis.yml) `x-coverage` for the full per-URL
+evidence table and [conformance/uon-conformance.yml](conformance/uon-conformance.yml) for
+education-regime standard conformance.
 
 ## Maintainers
 

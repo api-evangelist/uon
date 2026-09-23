@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Newcastle Australia
 providerId: uon
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
@@ -12,11 +12,13 @@ tags:
 - University
 - Plans
 description: >-
-  University of Newcastle Australia is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
+  University of Newcastle Australia is a non-commercial higher-education institution; it sells no API
+  and publishes no pricing. Corrected 2026-08-30: an earlier version of this file described free
+  "public library, repository, course and open-metadata interfaces". No such openly consumable
+  institution-operated interface was found on probe. The two surfaces UON does operate — a Shibboleth
+  SAML identity provider and a self-hosted XNAT platform — are reached through institutional
+  affiliation and federation membership, not through any plan. The repository, handbook and LMS
+  surfaces are vendor tenancies whose access terms are the vendors'.
 notes: >-
   No published per-seat or per-call commercial pricing. "Free / Open" reflects open
   public endpoints; "Affiliation / Credentialed" reflects access gated by institutional

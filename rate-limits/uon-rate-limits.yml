@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Newcastle Australia
 providerId: uon
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
@@ -12,10 +12,12 @@ tags:
 - University
 - Rate Limiting
 description: >-
-  University of Newcastle Australia does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
+  University of Newcastle Australia publishes no rate-limit table, because it publishes no consumable
+  public API. Corrected 2026-08-30: an earlier version of this file cited OAI-PMH, IIIF and library
+  harvesting endpoints; none was verified as institution-operated. What throttling exists in practice
+  is edge protection rather than a published policy — www.newcastle.edu.au sits behind a Cloudflare
+  bot challenge (HTTP 403) and the Figshare-tenanted repository behind an AWS WAF challenge (HTTP 202),
+  both of which reject automated clients outright rather than rate-limiting them.
 notes: Confirm per-service limits with each API's documentation; harvest responsibly.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/uon/refs/heads/main/apis.yml

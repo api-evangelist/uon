@@ -3,8 +3,79 @@ name: University of Newcastle Australia
 description: University of Newcastle Australia public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/uon/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
+  - date: '2026-08-30'
+    rating: 2
+    summary: >-
+      Re-profiled under the university pipeline, which settles operator attribution before saving
+      anything. The June 2026 review credited "the documented public Figshare REST API" as UON's
+      programmatic footprint, and the repository held eleven Figshare OpenAPI documents under UON's
+      slug. That is a vendor's contract on a generic vendor host (api.figshare.com/v2, claimed by
+      sixteen other institutions in this catalog) and it has been removed along with everything
+      derived from it. Two institution-operated surfaces were verified in its place: a live Shibboleth
+      SAML 2.0 identity provider at idp.newcastle.edu.au, registered in the Australian Access
+      Federation, and a self-hosted XNAT 1.9.1.1 imaging platform at xnat.newcastle.edu.au on UON's
+      own AWS estate, whose REST API is live but almost entirely authentication-gated. Four tenant
+      relationships are recorded as tenancies rather than as UON APIs: Figshare, CourseLoop,
+      Instructure Canvas and Springshare. UON holds two DataCite repository clients in its own name.
+      The rating does not move: the footprint is genuinely thin, but it is now thin for the right
+      reasons and attributed to the right operators.
+    endpoints:
+      - url: https://idp.newcastle.edu.au/idp/shibboleth
+        status: 200
+        note: INSTITUTION. SAML 2.0 IdP metadata, application/xml, entityID and scope newcastle.edu.au.
+      - url: https://md.aaf.edu.au/aaf-metadata.xml
+        status: 200
+        note: Two newcastle.edu.au entities in the AAF aggregate — the IdP and the XNAT service provider.
+      - url: https://xnat.newcastle.edu.au/xapi/siteConfig/buildInfo
+        status: 200
+        note: INSTITUTION. XNAT 1.9.1.1, unauthenticated; UON AWS prod-xnat-hmri-frontend ELB.
+      - url: https://xnat.newcastle.edu.au/xapi/v2/api-docs
+        status: 302
+        note: Swagger description redirects to login; no contract publicly readable.
+      - url: https://api.datacite.org/clients/ardcx.uon
+        status: 200
+        note: DataCite repository client ARDCX.UON, 65 DOIs.
+      - url: https://api.datacite.org/clients/uonau.figshare
+        status: 200
+        note: DataCite repository client UONAU.FIGSHARE, 29 DOIs.
+      - url: https://openresearch.newcastle.edu.au/oai?verb=Identify
+        status: 202
+        note: TENANT, unreadable. AWS WAF challenge on every User-Agent; Identify never seen.
+      - url: https://handbook.newcastle.edu.au/sitemap.xml
+        status: 200
+        note: TENANT (CourseLoop). Child sitemap lists 9,755 program/course URLs.
+      - url: https://canvas.newcastle.edu.au/
+        status: 200
+        note: TENANT (Instructure). Canvas API /api/v1/accounts returns 401 JSON.
+      - url: https://www.newcastle.edu.au/
+        status: 403
+        note: Live, Cloudflare bot challenge. A limitation on us, not a finding about the institution.
+      - url: https://policies.newcastle.edu.au/
+        status: 200
+        note: INSTITUTION. UON Policy Library on the university's own IP, readable.
+      - url: https://libguides.newcastle.edu.au/
+        status: 200
+        note: TENANT. Springshare LibGuides, CNAME region-au.libguides.com.
+      - url: https://github.com/university-of-newcastle-research
+        status: 200
+        note: INSTITUTION. 10 public research-code repositories; no API descriptions.
+      - url: https://api.newcastle.edu.au/
+        status: 0
+        note: Negative probe. No API gateway; host does not resolve.
+      - url: https://developer.newcastle.edu.au/
+        status: 0
+        note: Negative probe. No developer portal; host does not resolve.
+      - url: https://data.newcastle.edu.au/
+        status: 0
+        note: Negative probe. No open-data portal; host does not resolve.
+      - url: https://nova.newcastle.edu.au/
+        status: 0
+        note: Negative probe. Former VITAL repository; dangling CNAME to a deleted AWS load balancer.
+      - url: https://idp.newcastle.edu.au/.well-known/openid-configuration
+        status: 404
+        note: Negative probe. SAML only; no OIDC discovery document.
   - date: '2026-06-03'
     rating: 2
     summary: >-

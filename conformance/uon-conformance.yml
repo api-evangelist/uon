@@ -1,0 +1,152 @@
+generated: '2026-08-30'
+method: probed
+source: https://www.newcastle.edu.au/
+x-operator: institution
+note: >-
+  Domain-standard conformance for the Kin Score `education` regulatory regime, probed directly
+  against University of Newcastle (Australia) hosts on 2026-08-30. Every `conforms: true` below
+  points at a specific live response, not at a prose claim on a web page. Standards UON does not
+  publicly expose are recorded as false together with the negative probe that established it —
+  reward-only, nothing invented to fill a slot. Surfaces belonging to UON's vendors are excluded
+  from the institution's credit: the Open Research Newcastle repository is a Figshare tenancy, the
+  course handbook is a CourseLoop tenancy and the LMS is an Instructure Canvas tenancy, so any
+  conformance those platforms hold is the vendor's, not the institution's. UON's own web estate is
+  behind a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) which prevented probing
+  www.newcastle.edu.au for well-known documents; that is recorded as a limitation on us, not as a
+  finding about the institution.
+regime:
+  id: education
+  name: Education & Research
+  matched_via: tags
+domain_standards:
+  - id: shibboleth
+    conforms: true
+    operator: institution
+    evidence: >-
+      UON operates a Shibboleth Identity Provider. GET https://idp.newcastle.edu.au/idp/shibboleth
+      returns HTTP 200 application/xml;charset=utf-8 (4,484 bytes) containing a SAML
+      EntityDescriptor with entityID https://idp.newcastle.edu.au/idp/shibboleth, an
+      IDPSSODescriptor, a shibboleth-specific extension <shibmd:Scope regexp="false">
+      newcastle.edu.au</shibmd:Scope>, and a signing KeyDescriptor whose X.509 certificate carries
+      CN=idp.newcastle.edu.au and subjectAltName https://idp.newcastle.edu.au/idp/shibboleth.
+    evidence_url: https://idp.newcastle.edu.au/idp/shibboleth
+  - id: saml
+    conforms: true
+    version: '2.0'
+    operator: institution
+    evidence: >-
+      The same document is valid SAML 2.0 metadata: IDPSSODescriptor with
+      protocolSupportEnumeration urn:oasis:names:tc:SAML:2.0:protocol and SingleSignOnService
+      endpoints at https://idp.newcastle.edu.au/idp/profile/SAML2/POST/SSO and
+      https://idp.newcastle.edu.au/idp/profile/SAML2/Redirect/SSO. Independently confirmed in the
+      Australian Access Federation aggregate: GET https://md.aaf.edu.au/aaf-metadata.xml returns
+      HTTP 200 (3,178,473 bytes) and carries two entities under newcastle.edu.au — the IdP
+      https://idp.newcastle.edu.au/idp/shibboleth with DisplayName "University of Newcastle", and
+      the service provider https://xnat.newcastle.edu.au/xnat with DisplayName "XNAT".
+    evidence_url: https://md.aaf.edu.au/aaf-metadata.xml
+  - id: datacite
+    conforms: true
+    operator: institution
+    evidence: >-
+      UON holds two DataCite repository clients in its own name. GET
+      https://api.datacite.org/clients/ardcx.uon returns HTTP 200 with name "University of
+      Newcastle", symbol ARDCX.UON, clientType repository, year 2020; a DOI query for
+      client-id=ardcx.uon reports meta.total 65. GET
+      https://api.datacite.org/clients/uonau.figshare returns name "University of Newcastle
+      Australia", symbol UONAU.FIGSHARE, clientType repository, year 2024; client-id=uonau.figshare
+      reports meta.total 29. The membership and the minting authority are the institution's even
+      where the deposit path runs through a vendor platform.
+    evidence_url: https://api.datacite.org/clients/ardcx.uon
+  - id: oai-pmh
+    conforms: false
+    operator: tenant
+    evidence: >-
+      Not established. GET https://openresearch.newcastle.edu.au/oai?verb=Identify returns HTTP 202
+      with header x-amzn-waf-action: challenge and a zero-byte body, on an empty User-Agent, a
+      Googlebot User-Agent and a desktop Chrome User-Agent alike — an AWS WAF interstitial, so the
+      endpoint is live but unreadable to us and no Identify response was ever seen. Recorded false
+      rather than assumed: the earlier profile asserted an OAI-PMH endpoint with no probe behind it.
+      Note also that Open Research Newcastle is a Figshare tenancy, so any OAI-PMH conformance there
+      is Figshare's software, not UON engineering.
+    evidence_url: https://openresearch.newcastle.edu.au/oai?verb=Identify
+  - id: lti
+    conforms: false
+    operator: tenant
+    evidence: >-
+      No institution-operated LTI surface found. UON's LMS is an Instructure Canvas tenancy —
+      canvas.newcastle.edu.au and newcastle.instructure.com both return HTTP 200 with the same
+      26,245-byte Canvas login page — so any LTI 1.3 platform conformance belongs to Instructure.
+      No self-hosted Moodle or other institution-run LTI platform was found under newcastle.edu.au.
+    evidence_url: https://canvas.newcastle.edu.au/
+  - id: orcid
+    conforms: false
+    operator: none
+    evidence: >-
+      No institution-operated ORCID integration surface found. ORCID records naming the university
+      exist (GET https://pub.orcid.org/v3.0/search/?q=affiliation-org-name:"University of Newcastle"
+      returns num-found 6537) but those are ORCID's records about individuals, not a machine-readable
+      surface UON publishes. A search hit is not a conformance.
+    evidence_url: https://pub.orcid.org/v3.0/search/
+  - id: crossref
+    conforms: false
+    operator: none
+    evidence: >-
+      No Crossref member row found for the institution. GET
+      https://api.crossref.org/members?query=Newcastle&rows=8 returned HTTP 200 with no matching
+      University of Newcastle (Australia) member in the result set.
+    evidence_url: https://api.crossref.org/members?query=Newcastle
+  - id: scim
+    conforms: false
+    operator: none
+    evidence: >-
+      No publicly reachable SCIM endpoint. Identity provisioning at UON runs behind the Shibboleth
+      IdP and, for the student portal, an Okta tenancy (myhub.newcastle.edu.au serves an Okta sign-in
+      page referencing ok2static2.oktacdn.com); neither exposes a public /scim/v2 surface.
+    evidence_url: https://myhub.newcastle.edu.au/
+  - id: oneroster
+    conforms: false
+    operator: none
+    evidence: >-
+      No OneRoster surface found. No host under newcastle.edu.au serving a /ims/oneroster path was
+      discovered, and the student information system (PeopleSoft Campus Solutions 9.2 behind Okta at
+      myhub.newcastle.edu.au) is authentication-gated end to end.
+    evidence_url: https://myhub.newcastle.edu.au/
+  - id: ed-fi
+    conforms: false
+    operator: none
+    evidence: >-
+      Not applicable and not found. Ed-Fi is a US K-12 data standard; no Ed-Fi ODS/API surface exists
+      under newcastle.edu.au. Recorded explicitly so the absence is a measurement rather than a gap.
+    evidence_url: https://www.newcastle.edu.au/
+  - id: caliper
+    conforms: false
+    operator: none
+    evidence: >-
+      No Caliper Analytics event store or endpoint found. Learning analytics, where it exists, runs
+      inside the Instructure Canvas tenancy and is not exposed on an institution-operated host.
+    evidence_url: https://canvas.newcastle.edu.au/
+  - id: qti
+    conforms: false
+    operator: none
+    evidence: >-
+      No QTI assessment interchange surface found on any institution-operated host. Assessment lives
+      inside the Canvas tenancy.
+    evidence_url: https://canvas.newcastle.edu.au/
+general_standards:
+  - id: openapi
+    conforms: false
+    evidence: >-
+      UON publishes no OpenAPI description for anything. The ten OpenAPI documents previously held in
+      this repository were Figshare's generic api.figshare.com/v2 contract (info.title "Figshare
+      Altmetric API", info.contact "Figshare Support") and were removed on 2026-08-30 as
+      misattributed. Nothing was derived to replace them.
+    evidence_url: https://www.newcastle.edu.au/
+  - id: sitemap
+    conforms: true
+    operator: tenant
+    evidence: >-
+      GET https://handbook.newcastle.edu.au/sitemap.xml returns HTTP 200 application/xml, a
+      sitemapindex whose child https://handbook.newcastle.edu.au/sitemap/sitemap-1786154838198-1.xml
+      returns HTTP 200 (1,173,397 bytes) listing 9,755 program and course URLs with lastmod
+      2026-08-08. Machine-readable, but served from a CourseLoop tenancy.
+    evidence_url: https://handbook.newcastle.edu.au/sitemap.xml
