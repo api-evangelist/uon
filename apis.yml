@@ -377,7 +377,7 @@ apis:
     humanURL: https://canvas.newcastle.edu.au/
     baseURL: https://newcastle.instructure.com/api/v1
     tags:
-      - Learning Management
+      - LMS
       - Canvas
       - Instructure
       - Tenants
