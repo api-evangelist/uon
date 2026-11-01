@@ -1,4 +1,4 @@
-# University of Newcastle Australia (uon)
+# University of Newcastle Australia
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,98 +64,113 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of Newcastle (UON) is a public research university in Newcastle, New South Wales, Australia, ranked #179 in the QS World University Rankings 2025. This repository catalogs UON's public developer and API footprint as an [APIs.json](https://apisjson.org) provider profile for the API Evangelist network.
+The University of Newcastle (UON) is a public research university in Callaghan and Newcastle, New South Wales, ranked #179 in the QS World University Rankings order used by this cohort. It is a federation of buyers rather than an API producer: there is no central developer portal and no institutional API gateway — api.newcastle.edu.au, apis.newcastle.edu.au, developer.newcastle.edu.au, data.newcastle.edu.au and status.newcastle.edu.au all fail to resolve — and UON publishes no OpenAPI description for anything. What it genuinely operates is small and specific: a Shibboleth identity provider at idp.newcastle.edu.au serving live SAML 2.0 metadata under its own entityID and scope, registered in the Australian Access Federation; and a self-hosted XNAT 1.9.1.1 imaging-informatics platform at xnat.newcastle.edu.au, run with the Hunter Medical Research Institute on the university's own AWS estate, whose REST API answers on UON's host and is registered as a SAML service provider in the same federation. UON also holds two DataCite repository clients in its own name, ARDCX.UON and UONAU.FIGSHARE. Everything else that looks programmable is a tenancy on someone else's platform and is recorded as such, never as UON engineering: Open Research Newcastle is a Figshare tenancy, the course handbook is a CourseLoop tenancy, the learning management system is an Instructure Canvas tenancy, library guides are Springshare, site search is Squiz Funnelback, the student portal is PeopleSoft behind Okta, and the service desk is Oracle B2C Service. This profile was corrected on 2026-08-30: ten OpenAPI documents previously held here were Figshare's generic api.figshare.com/v2 contract, not the university's, and were removed along with everything derived from them.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/uon/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=uon-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · Research · Australia · New South Wales · Identity Federation · SAML · Shibboleth · Research Computing · Medical Imaging · Research Repository
 
-## Type
+## University of Newcastle Australia on APIs.io
 
-- Index / Consumer / 3rd-Party
+Everything profiled for University of Newcastle Australia is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/uon/](https://apis.io/providers/uon/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-University, Higher Education, Education, Research, Australia, New South Wales, Identity Federation, SAML, Shibboleth, Research Computing, Medical Imaging, Research Repository, Course Catalog, DataCite, Tenant
+- [University of Newcastle Shibboleth Identity Provider (SAML 2.0 metadata)](https://apis.io/apis/uon/identity-federation/) — UON's institutional identity provider, publishing machine-readable SAML 2.0 metadata at a stable URL. entityID https://idp.newcastle.edu.au/idp/shibboleth,…
+- [University of Newcastle XNAT Imaging Informatics Platform](https://apis.io/apis/uon/xnat-imaging/) — A self-hosted XNAT 1.9.1.1 imaging-informatics platform operated by the university with the Hunter Medical Research Institute, running on UON's own AWS…
+- [Open Research Newcastle (Figshare) — TENANT](https://apis.io/apis/uon/open-research-figshare/) — The university's open-access institutional repository and research-data store, running on the Figshare platform at openresearch.newcastle.edu.au. This is a…
+- [University of Newcastle Course Handbook (CourseLoop) — TENANT](https://apis.io/apis/uon/course-handbook-courseloop/) — The university's program and course handbook, served from handbook.newcastle.edu.au on the CourseLoop platform. Machine-readable to the extent that it…
+- [University of Newcastle Canvas LMS (Instructure) — TENANT](https://apis.io/apis/uon/canvas-lms/) — UON's learning management system, an Instructure Canvas tenancy reachable both at canvas.newcastle.edu.au and at newcastle.instructure.com, which return the…
 
-## APIs
+### Published properties
 
-UON operates no public developer portal and no API gateway (api., apis., developer., data. and
-status.newcastle.edu.au do not resolve), and publishes no OpenAPI for anything. Surfaces are recorded
-with an operator, because for a university that is the question that matters.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Institution-operated:
+#### Vocabulary (1)
 
-- **Shibboleth Identity Provider (SAML 2.0 metadata)** — https://idp.newcastle.edu.au/idp/shibboleth
-  returns HTTP 200 application/xml with entityID `https://idp.newcastle.edu.au/idp/shibboleth` and
-  `shibmd:Scope newcastle.edu.au`. Registered in the Australian Access Federation aggregate.
-- **XNAT imaging informatics platform** — https://xnat.newcastle.edu.au, self-hosted XNAT 1.9.1.1 on
-  UON's own AWS estate with the Hunter Medical Research Institute, registered as a SAML service
-  provider in the AAF. `/xapi/siteConfig/buildInfo` answers unauthenticated; data endpoints and the
-  Swagger description redirect to login.
+The provider's domain terms, defined.
 
-Tenant relationships — real institutional facts, but the contract is the vendor's and none of these
-vendors' specifications are kept in this repository:
+- [University of Newcastle Open Research Vocabulary](https://apis.io/vocabularies/uon/uon-vocabulary/)
 
-- **Open Research Newcastle** — Figshare tenancy at https://openresearch.newcastle.edu.au (AWS WAF
-  challenge, HTTP 202, on every request including `/oai?verb=Identify`).
-- **Course Handbook** — CourseLoop tenancy at https://handbook.newcastle.edu.au; sitemap enumerates
-  9,755 program and course URLs.
-- **Canvas LMS** — Instructure tenancy at https://canvas.newcastle.edu.au; the Canvas REST API returns
-  HTTP 401 at `/api/v1/accounts`.
+#### Security (1)
 
-Also holds two DataCite repository clients in its own name: `ARDCX.UON` (65 DOIs) and
-`UONAU.FIGSHARE` (29 DOIs).
+Authentication, trust centre, and vulnerability disclosure.
 
-## Plans, Rate Limits, and FinOps
+- [Uon Domain Security](https://apis.io/security/uon/uon-domain-security/)
 
-- Plans & Pricing: [plans/uon-plans-pricing.yml](plans/uon-plans-pricing.yml)
-- Rate Limits: [rate-limits/uon-rate-limits.yml](rate-limits/uon-rate-limits.yml)
-- FinOps: [finops/uon-finops.yml](finops/uon-finops.yml)
+#### Plans and pricing (1)
 
-## Timestamps
+Published plans, tiers and prices.
 
-- Created: 2026-06-03
-- Modified: 2026-08-30
+- [Uon Plans Pricing](https://apis.io/plans/uon/uon-plans-pricing/)
 
-## Common Properties
+#### Rate limits (1)
 
-- Website: https://www.newcastle.edu.au/ (live, behind a Cloudflare bot challenge — HTTP 403)
-- Identity Federation: https://idp.newcastle.edu.au/idp/shibboleth
-- Research Computing: https://xnat.newcastle.edu.au/
-- Research Repository: https://openresearch.newcastle.edu.au/
-- Course Catalog: https://handbook.newcastle.edu.au/
-- Policies: https://policies.newcastle.edu.au/
-- Library Guides: https://libguides.newcastle.edu.au/ (Springshare tenancy)
-- GitHub Organization: https://github.com/university-of-newcastle-research
-- Conformance: [conformance/uon-conformance.yml](conformance/uon-conformance.yml)
-- Review: [review.yml](review.yml)
+Published request limits.
 
-## Notes
+- [Uon Rate Limits](https://apis.io/rate-limits/uon/uon-rate-limits/)
 
-Re-profiled on 2026-08-30 under the API Evangelist university pipeline, which settles operator
-attribution before saving anything. **This repository previously held eleven Figshare OpenAPI
-documents attributed to the University of Newcastle.** Every one of them carried
-`info.title: "Figshare Altmetric API"` (or `"Figshare altmetric <Resource> API"`),
-`info.contact: Figshare Support` at support.figshare.com, and `servers[0].url:
-https://api.figshare.com/v2` — a generic vendor host the cohort audit finds claimed by sixteen other
-institutions in this catalog. Those eleven specs and the thirty-six artifacts derived from them
-(OpenCollection and Postman collections, JSON Schema, JSON Structure, examples, a JSON-LD context,
-two Spectral rulesets, a vocabulary, OAuth scopes, an authentication summary, an agentic-access
-contract and a capability map) were removed. Nothing was derived to replace them: UON publishes no
-machine-readable contract of its own, and the XNAT deployment's Swagger is behind authentication and
-belongs to the XNAT product in any case.
+#### FinOps (1)
 
-No API endpoints were fabricated. Limits on this pass, recorded as limitations on us rather than
-findings about the institution: www.newcastle.edu.au and its subordinate hosts return a Cloudflare
-bot challenge (HTTP 403, `cf-mitigated: challenge`), so robots.txt, llms.txt and `.well-known` could
-not be read there; openresearch.newcastle.edu.au returns an AWS WAF challenge (HTTP 202,
-`x-amzn-waf-action: challenge`, zero-byte body) on every User-Agent tried, so the OAI-PMH `Identify`
-response was never seen and OAI-PMH conformance is recorded as **not established** rather than
-assumed. `nova.newcastle.edu.au`, the former VITAL repository, is a dangling CNAME to a deleted AWS
-load balancer and no longer resolves. See [apis.yml](apis.yml) `x-coverage` for the full per-URL
-evidence table and [conformance/uon-conformance.yml](conformance/uon-conformance.yml) for
-education-regime standard conformance.
+What the API costs to run, by operation.
 
-## Maintainers
+- [Uon Finops](https://apis.io/finops/uon/uon-finops/)
 
-- Kin Lane — kin@apievangelist.com
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.newcastle.edu.au/)
+- [Documentation](https://libguides.newcastle.edu.au/)
+- [GitHub](https://github.com/university-of-newcastle-research)
+
+## API Evangelist rating
+
+**Kin Score 12.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 4.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 5.3 |
+
+**Agent readiness 0.6** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 18.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/uon/](https://apis.io/providers/uon/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for University of Newcastle Australia: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/uon/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
